@@ -1,0 +1,48 @@
+#include <iostream>
+using namespace std;
+
+// Base class
+class Animal {
+public:
+    // Declaring a virtual function
+    virtual void makeSound() {
+        cout << "The animal makes a generic sound." << endl;
+    }
+    
+    // Virtual destructor is recommended when using virtual functions
+    virtual ~Animal() {} 
+};
+
+// Derived class 1
+class Dog : public Animal {
+public:
+    // Overriding the virtual function
+    void makeSound() override {
+        cout << "The dog barks: Woof! Woof!" << endl;
+    }
+};
+
+// Derived class 2
+class Cat : public Animal {
+public:
+    // Overriding the virtual function
+    void makeSound() override {
+        cout << "The cat meows: Meow! Meow!" << endl;
+    }
+};
+
+int main() {
+    // Base class pointers pointing to derived class objects
+    Animal* animal1 = new Dog();
+    Animal* animal2 = new Cat();
+
+    // The correct overridden function is resolved at runtime
+    animal1->makeSound(); // Outputs: The dog barks: Woof! Woof!
+    animal2->makeSound(); // Outputs: The cat meows: Meow! Meow!
+
+    // Clean up memory
+    delete animal1;
+    delete animal2;
+
+    return 0;
+}
